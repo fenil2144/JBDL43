@@ -1,0 +1,5 @@
+com/example/demoProject/repository/DemoRepository.class
+com/example/demoProject/DemoProjectApplication.class
+com/example/demoProject/model/Demo.class
+com/example/demoProject/controller/DemoController.class
+com/example/demoProject/service/DemoService.class
