@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Person {
 	
 	private int id;
-	private String firstName;
+	private String firstName; //first_name
 	private String lastName;
 	private Integer age;
 	private String dob;

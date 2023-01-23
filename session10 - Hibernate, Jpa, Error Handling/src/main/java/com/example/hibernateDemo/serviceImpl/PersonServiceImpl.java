@@ -1,4 +1,4 @@
-package com.example.demo.serviceImpl;
+package com.example.hibernateDemo.serviceImpl;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -8,14 +8,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.BadPersonRequestException;
-import com.example.demo.dtos.CreatePersonDto;
-import com.example.demo.model.Person;
-import com.example.demo.repository.PersonRepositoryInterf;
-import com.example.demo.service.PersonServicfeInterf;
+import com.example.hibernateDemo.dtos.CreatePersonDto;
+import com.example.hibernateDemo.exception.PersonNotFoundException;
+import com.example.hibernateDemo.model.Person;
+import com.example.hibernateDemo.repository.PersonRepositoryInterf;
+import com.example.hibernateDemo.service.PersonServicfeInterf;
+
 
 @Service
-public class PersonServiceImpl implements PersonServicfeInterf {
+public class PersonServiceImpl implements PersonServicfeInterf{
 	
 	@Autowired
 	PersonRepositoryInterf personRepositoryInterf;
@@ -26,8 +27,7 @@ public class PersonServiceImpl implements PersonServicfeInterf {
 		
 		if(person.getAge() == null)
 			person.setAge(calculateAgeFromDOB(person.getDob()));
-//		personRepositoryInterf.createPerson(person);
-		personRepositoryInterf.createPersonStatic(person);
+		personRepositoryInterf.save(person);		
 	}
 	
 	private Integer calculateAgeFromDOB(String dob) {
@@ -43,26 +43,19 @@ public class PersonServiceImpl implements PersonServicfeInterf {
 
 	@Override
 	public Person getPersonById(int id) {
-		return personRepositoryInterf.getPersonById(id);
+		return personRepositoryInterf.findById(id).orElseThrow(
+				() -> new PersonNotFoundException("person with Id "+id+" not Present!"));
 	}
 
 	@Override
-	public Person deletePerson(int id) {
-		Person person = personRepositoryInterf.getPersonById(id);
-		
-		if(person == null) {
-			throw new BadPersonRequestException("Person With id = "+id+" Not Present");
-		}
-		boolean isDeleted =  personRepositoryInterf.deletePerson(id);
-		if(isDeleted) {
-			return person;
-		}
-		return null;
+	public void deletePerson(int id) {
+		personRepositoryInterf.deleteById(id);
 	}
 
 	@Override
 	public List<Person> getAllPersons() throws SQLException {
-		return personRepositoryInterf.getAllPersons();
+		return personRepositoryInterf.findAll();
 	}
+
 
 }

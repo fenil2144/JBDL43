@@ -1,10 +1,11 @@
-package com.example.demo.service;
+package com.example.hibernateDemo.service;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import com.example.demo.dtos.CreatePersonDto;
-import com.example.demo.model.Person;
+import com.example.hibernateDemo.dtos.CreatePersonDto;
+import com.example.hibernateDemo.model.Person;
+
 
 public interface PersonServicfeInterf {
 	
@@ -12,7 +13,7 @@ public interface PersonServicfeInterf {
 	
 	Person getPersonById(int id);
 	
-	Person deletePerson(int id);
+	void deletePerson(int id);
 	
 	List<Person> getAllPersons() throws SQLException;
 
