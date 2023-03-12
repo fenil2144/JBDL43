@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "327289d4-123f-4098-a12a-2c20b4181029",
+		"name": "E-Wallet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:6001/user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Darshil\",\n    \"phoneNumber\":\"654321\",\n    \"password\":\"darshil123\",\n    \"dob\":\"21/07/1976\",\n    \"country\":\"India\",\n    \"userIdentifier\":\"PAN\",\n    \"identifierValue\":\"HGFGV6767G\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:6001/user",
+					"host": [
+						"localhost"
+					],
+					"port": "6001",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:5000/transact?receiver=123456&purpose=Bill Payment&amount=5",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "darshil123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "654321",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/transact?receiver=123456&purpose=Bill Payment&amount=5",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"transact"
+					],
+					"query": [
+						{
+							"key": "receiver",
+							"value": "123456"
+						},
+						{
+							"key": "purpose",
+							"value": "Bill Payment"
+						},
+						{
+							"key": "amount",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
